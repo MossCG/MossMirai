@@ -10,17 +10,22 @@ import net.mamoe.mirai.utils.ExternalResource;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.mossmc.mosscg.MossMirai.*;
 
-public class BotReply {
-    public static Map<String,List<String>> replyList;
+public class BotKeyword {
+    public static Map<String, List<String>> keywordList;
+    public static List<String> keyword;
 
-    public static void loadReply() {
-        sendInfo("正在加载自动回复信息");
-        replyList = new HashMap<>();
-        File file = new File("./MossMirai/reply");
+    public static void loadKeyword() {
+        sendInfo("正在加载关键词信息");
+        keywordList = new HashMap<>();
+        keyword = new ArrayList<>();
+        File file = new File("./MossMirai/keyword");
         File[] tempList = file.listFiles();
         if (tempList == null) {
             return;
@@ -40,20 +45,30 @@ public class BotReply {
                     }
                     cacheList.add((String) o);
                 }
-                replyList.put(entry.getKey(),cacheList);
+                keywordList.put(entry.getKey(),cacheList);
+                keyword.add(entry.getKey());
             }
         }
-        sendInfo(replyList.toString());
-        sendInfo("自动回复信息加载完成");
+        sendInfo(keywordList.toString());
+        sendInfo("关键词信息加载完成");
     }
 
-    public static MessageChainBuilder getReply(String key, Group group, User user) {
-        if (!replyList.containsKey(key)) {
+    public static MessageChainBuilder getReply(String receive, Group group, User user) {
+        MessageChainBuilder chain;
+        int i = 0;
+        String key = null;
+        while (keyword.size() > i) {
+            if (receive.contains(keyword.get(i))) {
+                key = keyword.get(i);
+                break;
+            }
+            i++;
+        }
+        if (key == null) {
             return null;
         }
-        MessageChainBuilder chain;
-        if (replyList.get(key).size() == 1) {
-            String message = replyList.get(key).get(0);
+        if (keywordList.get(key).size() == 1) {
+            String message = keywordList.get(key).get(0);
             if (message.contains("##<") && message.contains(">##")) {
                 return loadArgs(message,group,user);
             } else {
@@ -61,8 +76,8 @@ public class BotReply {
                 chain.append(message);
             }
         } else {
-            int random = getRandomInt(replyList.get(key).size()-1,0);
-            String message = replyList.get(key).get(random);
+            int random = getRandomInt(keywordList.get(key).size()-1,0);
+            String message = keywordList.get(key).get(random);
             if (message.contains("##<") && message.contains(">##")) {
                 return loadArgs(message,group,user);
             } else {
@@ -73,7 +88,7 @@ public class BotReply {
         return chain;
     }
 
-    public static Image loadImage(String key,Group group, User user) {
+    public static Image loadImage(String key, Group group, User user) {
         Image image;
         if (group != null) {
             image = group.uploadImage(ExternalResource.create(new File("./MossMirai/image/"+key)));

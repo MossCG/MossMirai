@@ -16,11 +16,24 @@ public class BotMessage {
     public static void readMessage(Group group, User user, MessageChain chain, messageType type) {
         String message = chain.contentToString();
         printMessage(group,user,message,type);
+        MessageChainBuilder reply = null;
         if (message.startsWith(getConfig("botCommandPrefix"))) {
-            MessageChainBuilder reply = BotCommand.readCommand(message,user.getId());
-            returnCommandMessage(group,user,reply,type);
+            reply = BotCommand.readCommand(message,user.getId());
         }
-        MessageChainBuilder reply = BotReply.getReply(message);
+        if (reply != null) {
+            returnCommandMessage(group,user,reply,type);
+            if (getConfig("botOnlyOneReply").equals("true")) {
+                return;
+            }
+        }
+        reply = BotReply.getReply(message,group,user);
+        if (reply != null) {
+            returnReplyMessage(group,user,reply,type);
+            if (getConfig("botOnlyOneReply").equals("true")) {
+                return;
+            }
+        }
+        reply = BotKeyword.getReply(message,group,user);
         if (reply != null) {
             returnReplyMessage(group,user,reply,type);
         }

@@ -50,6 +50,7 @@ public class BotManager {
             }
         }
         BotReply.loadReply();
+        BotKeyword.loadKeyword();
     }
     public static void startBot() {
         sendInfo("正在初始化机器人模块");

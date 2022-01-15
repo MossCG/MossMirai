@@ -16,6 +16,17 @@ public class FileManager {
             if (!basicDir.exists()) {
                 basicDir.mkdir();
             }
+            //图片文件夹检查
+            File imageDir = new File("./MossMirai/image");
+            if (!imageDir.exists()) {
+                imageDir.mkdir();
+                InputStream in = MossMirai.class.getClassLoader().getResourceAsStream("awa.jpg");
+                assert in != null;
+                Files.copy(in, imageDir.toPath());
+                in = MossMirai.class.getClassLoader().getResourceAsStream("awa2.jpg");
+                assert in != null;
+                Files.copy(in, imageDir.toPath());
+            }
             //回复配置文件夹检查
             File replyDir = new File("./MossMirai/reply");
             if (!replyDir.exists()) {
@@ -23,6 +34,14 @@ public class FileManager {
                 InputStream in = MossMirai.class.getClassLoader().getResourceAsStream("reply.json");
                 assert in != null;
                 Files.copy(in, replyDir.toPath());
+            }
+            //关键词配置文件夹检查
+            File keywordDir = new File("./MossMirai/keyword");
+            if (!keywordDir.exists()) {
+                keywordDir.mkdir();
+                InputStream in = MossMirai.class.getClassLoader().getResourceAsStream("keyword.json");
+                assert in != null;
+                Files.copy(in, keywordDir.toPath());
             }
             //log文件夹检查
             File logDir = new File("./MossMirai/logs");
