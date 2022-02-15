@@ -21,10 +21,14 @@ botAdmins: "1292141077"
 botHeartbeat: 1
 #机器人登陆协议（1-ANDROID_PHONE、2-ANDROID_PAD、3-ANDROID_WATCH）
 botProtocol: 1
-
 #机器人是否只回复一条信息
 #避免指令和关键词或自动回复有相同内容导致多回复
 #回复优先级：指令>自动回复>关键词
 botOnlyOneReply: true
 #机器人是否会提示未知指令及无权限
 botUnknownCommand: false
+
+#是否绕过windows的启动参数判断
+#用来避免之间点开jar导致无界面运行
+#甚至还不会关的情况的
+systemCheckPass: true

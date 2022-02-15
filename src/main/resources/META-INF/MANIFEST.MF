@@ -2,4 +2,4 @@ Manifest-Version: 1.0
 Implementation-Title: MossMirai
 Implementation-Version: MossMirai
 Implementation-Vendor: MossCG
-Main-Class: org.mossmc.mosscg.MossMirai
+Main-Class: org.mossmc.mosscg.MossMirai.MossMirai
