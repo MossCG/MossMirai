@@ -1,5 +1,5 @@
 # MossMirai
-一个开源的，简单的，基于Mirai的QQ机器人软件
+一个开源的，简单的，基于Mirai的QQ机器人框架
 <br>
 <br>项目基于https://github.com/mamoe/mirai
 <br>
@@ -8,6 +8,23 @@
 <br>特定全句匹配自动回复
 <br>关键词匹配自动回复
 <br>回复带多个表情包或图片
-<br>
-<br>未来计划加入的功能：
 <br>插件读取加载
+<br>
+<br>使用方法：
+<br>双击jar会生成一个bat
+<br>然后去MossMirai/config.yml里头改配置文件
+<br>双击bat运行bot
+<br>
+<br>reply是自动回复配置文件夹
+<br>keyword是关键词回复配置文件夹
+<br>plugins是插件文件夹
+<br>logs是日志文件夹
+<br>image是图片文件夹
+<br>bot是机器人文件夹，不用动
+<br>
+<br>重载功能尚不完善，别用！
+<br>插件API文档在写了QAQ
+<br>
+<br>推荐的插件列表：
+<br>[官方]MossLuck By MossCG 一个简单的今日人品插件
+<br>开源地址：https://github.com/MossCG/MossMirai-MossLuck
