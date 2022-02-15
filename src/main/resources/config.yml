@@ -31,4 +31,4 @@ botUnknownCommand: false
 #是否绕过windows的启动参数判断
 #用来避免之间点开jar导致无界面运行
 #甚至还不会关的情况的
-systemCheckPass: true
+systemCheckPass: false

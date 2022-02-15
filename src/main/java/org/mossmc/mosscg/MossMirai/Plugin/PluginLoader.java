@@ -37,7 +37,7 @@ public class PluginLoader {
                 ClassLoader classLoader = new URLClassLoader(new URL[]{pluginFileURL}, ClassLoader.getSystemClassLoader());
                 ClassLoader classLoaderOnly = new URLClassLoader(new URL[]{pluginFileURL}, null);
                 //加载插件配置文件
-                InputStream propertiesStream = classLoader.getResourceAsStream(pluginSettings);
+                InputStream propertiesStream = classLoaderOnly.getResourceAsStream(pluginSettings);
                 Properties properties = new Properties();
                 properties.load(propertiesStream);
                 //加载主类

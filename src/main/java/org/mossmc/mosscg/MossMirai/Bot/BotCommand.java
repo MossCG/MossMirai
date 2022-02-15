@@ -46,9 +46,9 @@ public class BotCommand {
         int i = 0;
         while (i<PluginInfo.pluginList.size()) {
             String plugin = PluginInfo.pluginList.get(i);
-            chain.append("\r\n插件").append(plugin);
-            chain.append(" | 版本").append(PluginInfo.getPluginInfo(plugin,"version"));
-            chain.append(" | 作者").append(PluginInfo.getPluginInfo(plugin,"author"));
+            chain.append("\r\n[").append(plugin).append("]");
+            chain.append("\r\n版本：").append(PluginInfo.getPluginInfo(plugin,"version"));
+            chain.append("\r\n作者：").append(PluginInfo.getPluginInfo(plugin,"author"));
             i++;
         }
     }
